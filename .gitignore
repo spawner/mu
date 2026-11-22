@@ -429,3 +429,12 @@ FodyWeavers.xsd
 
 *.sln
 *.slnx
+
+# Premake-generated project files (regenerate with premake5)
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
+# Premake build output
+/x64/
+/x86/
