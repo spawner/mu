@@ -187,6 +187,5 @@ void Scanner::comment() {
 
 	if(level != 0) {
 		Mu::error(_line, "unclosed comment");
-		return;
 	}
 }

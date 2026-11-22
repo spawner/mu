@@ -33,6 +33,10 @@ public:
 	explicit Token(TokenType type, const std::string& lexeme, Literal literal, std::size_t line) : _type(type), _lexeme(lexeme), _literal(std::move(literal)), _line(line) {};
 
 public:
+	TokenType type() const { return _type; }
+	const std::string& lexeme() const { return _lexeme; }
+	std::size_t line() const { return _line; }
+
 	const std::string toString() const {
 		if (_type == TokenType::ENOF) return "EOF";
 
