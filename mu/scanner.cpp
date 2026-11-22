@@ -65,7 +65,9 @@ void Scanner::scanToken() {
 		if (match('/')) {
 			while (peek() != '\n' && !atEnd()) ++_current;
 		}
-		else {
+		else if (match('*')) {
+			comment();
+		} else {
 			addToken(TokenType::SLASH);
 		}
 		break;
@@ -163,4 +165,28 @@ void Scanner::identifier() {
 	}
 	
 	addToken(type);
+}
+
+void Scanner::comment() {
+	int level = 1;
+	while (!atEnd() && level > 0) {
+		if (_source[_current] == '\n') {
+			_line++;
+		}
+
+		if (peek() == '*' && peekNext() == '/') {
+			level -= 1;
+			_current += 2;
+		} else if (peek() == '/' && peekNext() == '*') {
+			level += 1;
+			_current += 2;
+		} else {
+			_current += 1;
+		}
+	}
+
+	if(level != 0) {
+		Mu::error(_line, "unclosed comment");
+		return;
+	}
 }

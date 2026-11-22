@@ -72,6 +72,7 @@ private:
 	void string();
 	void number();
 	void identifier();
+	void comment();
 private:
 	std::size_t _start = 0;
 	std::size_t _current = 0;
